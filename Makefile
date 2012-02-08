@@ -1,7 +1,6 @@
 all:
-	gcc -Wall -o SampleD SampleD.c
-	gcc -Wall -o report report.c
+	gcc -Wall -o build/SampleD src/SampleD.c
+	gcc -Wall -o build/report  src/report.c
 
 clean:
-	rm -rf SampleD
-	rm -rf report
+	rm -rf build
