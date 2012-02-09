@@ -202,6 +202,8 @@ int main(void)
 		} else {
 			close(filedesc);
 		}
+
+		sleep(1);
 	}
 done:
 	asl_close(asl);
