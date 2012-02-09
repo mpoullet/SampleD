@@ -18,6 +18,11 @@
 #include <launch.h>
 
 #include <HomePlugNet.h>
+#include <Adapter.h>
+#include <AdapterConnection.h>
+
+using namespace std;
+using namespace HomePlug;
 
 int main(void)
 {
@@ -33,6 +38,8 @@ int main(void)
 	aslclient asl = NULL;
 	aslmsg log_msg = NULL;
 	int retval = EXIT_SUCCESS;
+
+	launch_data_t the_label;
 
 	/*
 	 * Create a new ASL log
@@ -79,7 +86,7 @@ int main(void)
 		goto done;
 	}
 
-        launch_data_t the_label = launch_data_dict_lookup(checkin_response, LAUNCH_JOBKEY_LABEL);
+	the_label = launch_data_dict_lookup(checkin_response, LAUNCH_JOBKEY_LABEL);
 	if (NULL == the_label) {
 		asl_log(asl, log_msg, ASL_LEVEL_ERR, "No label found");
 		retval = EXIT_FAILURE;
@@ -199,13 +206,24 @@ int main(void)
 		asl_log(asl, log_msg, ASL_LEVEL_NOTICE, "got file descriptor %d", filedesc);
 
 		if (the_stream) {
-			fprintf(the_stream, "hello world!\n");
+			CHomePlugNet homeplugnet;
+			string strError;
+			int ret = homeplugnet.Open(0, strError);
+			for(unsigned i = 0; i < 50; ++i) {
+				homeplugnet.TriggerScan();
+				homeplugnet.Read();
+				usleep(100*1000);
+			}
+			std::stringstream strm;
+			strm << homeplugnet;
+			homeplugnet.Close();
+
+			fprintf(the_stream, "%s", strm.str().c_str());
 			fclose(the_stream);
 		} else {
 			close(filedesc);
 		}
 
-		sleep(1);
 	}
 done:
 	asl_close(asl);
