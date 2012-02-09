@@ -15,6 +15,6 @@ connect(SOCKET, $destination) || die "connect: $!";
 # Read whatever the streamm provides
 my $message;
 while ($message = <SOCKET>) {
-        print "$message\n";
+        print "$message";
 }
 close SOCKET || die "close: $!";
