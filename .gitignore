@@ -1,2 +1,5 @@
+.DS_Store
 build
 *.swp
+SampleD.xcodeproj/project.xcworkspace/xcuserdata
+SampleD.xcodeproj/xcuserdata

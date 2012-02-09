@@ -17,6 +17,8 @@
 #include <libgen.h>
 #include <launch.h>
 
+#include <HomePlugNet.h>
+
 int main(void)
 {
 	struct sockaddr_storage ss;
