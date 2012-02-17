@@ -14,8 +14,14 @@
 	<dict>
 		<key>MyListenerSocket</key>
 		<dict>
-			<key>SockServiceName</key>
-			<string>12345</string>
+			<key>SockFamily</key>
+			<string>Unix</string>
+			<key>SockPathMode</key>
+			<integer>438</integer>
+			<key>SockPathName</key>
+			<string>/tmp/plcd</string>
+			<key>SockType</key>
+			<string>Stream</string>
 		</dict>
 	</dict>
 </dict>

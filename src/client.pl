@@ -6,10 +6,10 @@ use Socket;
 # Set the hostname and port number
 # For this sample we'll use the same port number
 # that is specified in SampleD.c
-my $destination = sockaddr_in(12345, inet_aton('localhost'));
+my $destination = sockaddr_un("/tmp/plcd");
 
 # Create the socket, connect to the port
-socket(SOCKET, PF_INET, SOCK_STREAM, getprotobyname('tcp')) || die "socket: $!";
+socket(SOCKET, PF_UNIX, SOCK_STREAM, 0) || die "socket: $!";
 connect(SOCKET, $destination) || die "connect: $!";
 
 # Read whatever the streamm provides
