@@ -148,11 +148,11 @@ int main(void)
 		 * Get the next event from the kernel event queue.
 		 *
 		 */
-		if ((filedesc = kevent(kq, NULL, 0, &kev_listener, 1, NULL)) == -1) {
+		if ((retval = kevent(kq, NULL, 0, &kev_listener, 1, NULL)) == -1) {
 			asl_log(asl, log_msg, ASL_LEVEL_ERR, "kevent(): %m");
 			retval = EXIT_FAILURE;
 			goto done;
-		} else if (filedesc == 0) {
+		} else if (retval == 0) {
 			retval = EXIT_SUCCESS;
 			goto done;
 		}
